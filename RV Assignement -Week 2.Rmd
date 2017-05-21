@@ -1,0 +1,48 @@
+---
+title: "DevelopingDataProducts - Assignment 2"
+output:
+  html_document:
+    fig_caption: yes
+    keep_md: yes
+    number_sections: yes
+    toc: yes
+  word_document:
+    toc: yes
+---
+## Summary Instructions
+## Date: 5/21/2017
+
+Create a web page using R Markdown that features a map created with Leaflet.
+
+Host your webpage on either GitHub Pages, RPubs, or NeoCities.
+
+Your webpage must contain the date that you created the document, and it must contain a map created with Leaflet. We would love to see you show off your creativity!
+Review criteria
+
+The rubric contains the following two questions:
+
+1. Does the web page feature a date and is this date less than two months before the date that you're grading        this assignment?
+2. Does the web page feature an interactive map that appears to have been created with Leaflet?
+
+## Submission: 
+
+## Temples of Kumbakonam, South India
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(leaflet)
+df <- read.csv2("./data/kumbakonam.csv", header=TRUE, dec=".", sep = ",")
+head(df)
+```
+
+```{r}
+my_map <- leaflet() %>% 
+  addTiles() %>% 
+  addMarkers(lat=10.9617, lng=79.3881, popup = "Beautiful Temples of Kumbakonam, South India") %>%
+  addTiles() %>%
+  addMarkers(lat=as.numeric(df$Lat), lng = as.numeric(df$Long), popup = df$temple)
+my_map
+```
